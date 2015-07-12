@@ -1,7 +1,7 @@
 #avrkit
 
 ##About
-A collection of functions for embedded development with atmel atmega8.
+A collection of functions for embedded development with atmel avr devices.
 
 ##Supported devices
 * atmega8
