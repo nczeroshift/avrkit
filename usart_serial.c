@@ -1,4 +1,6 @@
 
+#include "settings.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -24,7 +26,7 @@ static volatile uint8_t USART_TxTail;
 
 void (*USART_RxCallback)(uint8_t ch) = NULL;
 
-void USART_Init(uint64_t baudrate){
+void USART_Enable(uint64_t baudrate){
     uint64_t baud_setting = (F_CPU / 8 / baudrate - 1) / 2;
 
     memset(USART_RxBuf,0,USART_RX_SIZE);
