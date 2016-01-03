@@ -1,3 +1,7 @@
+/**
+* AVRKIT
+* https://github.com/nczeroshift/avrkit/
+*/
 
 #include "settings.h"
 
@@ -26,8 +30,8 @@ static volatile uint8_t USART_TxTail;
 
 void (*USART_RxCallback)(uint8_t ch) = NULL;
 
-void USART_Enable(uint64_t baudrate){
-    uint64_t baud_setting = (F_CPU / 8 / baudrate - 1) / 2;
+void USART_Enable(uint64_t baudrate, uint64_t f_cpu){
+    uint64_t baud_setting = (f_cpu / 8 / baudrate - 1) / 2;
 
     memset(USART_RxBuf,0,USART_RX_SIZE);
     memset(USART_TxBuf,0,USART_TX_SIZE);

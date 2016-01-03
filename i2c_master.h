@@ -1,10 +1,15 @@
+/**
+* AVRKIT
+* https://github.com/nczeroshift/avrkit/
+*/
+
 #ifndef _AVRKIT_CLI_I2C_MASTER_H_
 #define _AVRKIT_CLI_I2C_MASTER_H_
 
 #include <stdint.h>
 #include "settings.h"
 
-void I2C_Init(uint32_t clock);
+void I2C_Init(uint32_t clock, uint64_t f_cpu);
 
 uint8_t I2C_Random_Read(uint8_t dev_id,
     uint8_t dev_addr,

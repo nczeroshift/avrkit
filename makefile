@@ -2,7 +2,7 @@
 MCU_GCC     = atmega8
 MCU_AVRDUDE = m8
 OUT_DIR     = out
-OBJECTS     = main.o usart_serial.o cli_parser.o i2c_master.o adc.o pwm_osc1.o state_machine.o
+OBJECTS     = main.o usart_serial.o cli_parser.o i2c_master.o adc.o pwm_osc1.o state_machine.o music.o
 
 CC          = avr-gcc
 OBJCOPY     = avr-objcopy
@@ -22,4 +22,8 @@ $(OUT_DIR)/%.o: %.c;@echo 'cc' $^;$(CC) $(CFLAGS) -o $@ -c $^;
 
 clean: ;rm -f $(OUT_DIR)/*.o $(OUT_DIR)/*.map $(OUT_DIR)/*.out $(OUT_DIR)/*.hex
 
-load: program.hex; avrdude -c usbasp -p $(MCU_AVRDUDE) -u -U flash:w:program.hex
+load: program.hex; avrdude -c usbasp -p $(MCU_AVRDUDE) -u -U flash:w:$(OUT_DIR)/program.hex
+
+fusesRC: ;avrdude -c usbasp -p m8 -U lfuse:w:0xe4:m -U hfuse:w:0xd9:m # RC
+
+fusesCR: ;avrdude -c usbasp -p m8 -U lfuse:w:0xff:m -U hfuse:w:0xd9:m # CRISTAL

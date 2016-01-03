@@ -1,8 +1,11 @@
+/**
+* AVRKIT
+* https://github.com/nczeroshift/avrkit/
+*/
 
 #include "i2c_master.h"
 
 #include <avr/io.h>
-#include <util/delay.h>
 #include <compat/twi.h>
 #include <stdio.h>
 
@@ -13,11 +16,11 @@
 
 // Based on Ronald Willem Besinga i2c tutorial (http://www.ermicro.com/blog/?p=744)
 
-void I2C_Init(uint32_t clock)
+void I2C_Init(uint32_t clock, uint64_t f_cpu)
 {
      // Initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1
      TWSR = 0;                         /* no prescaler */
-     TWBR = ((F_CPU/clock)-16)/2;  /* must be > 10 for stable operation */
+     TWBR = ((f_cpu/clock)-16)/2;  /* must be > 10 for stable operation */
 }
 
 unsigned char I2C_Transmit(uint8_t type) {

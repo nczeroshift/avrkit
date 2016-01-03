@@ -1,11 +1,12 @@
+/**
+* AVRKIT
+* https://github.com/nczeroshift/avrkit/
+*/
 
 #ifndef _AVRKIT_SETTINGS_H_
 #define _AVRKIT_SETTINGS_H_
 
-#define F_CPU           16000000    // CPU FREQUENCY
-
 // USART SERIAL
-#define USART_BAUD      9600        // Number of symbols per second
 #define USART_RX_SIZE   64          // Max receive queue size
 #define USART_TX_SIZE   64          // Max transmit queue size
 
