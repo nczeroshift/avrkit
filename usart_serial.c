@@ -41,7 +41,11 @@ void USART_Enable(uint64_t baudrate, uint64_t f_cpu){
     
     UCSRA &= ~(1 << U2X);                           // Don't use U2X
     UCSRB =  (1<<TXEN) | (1<<RXEN) | (1<<RXCIE);    // Enable TX, RX, Interrupt
+    #ifdef __AVR_ATmega8__
     UCSRC = (1<<URSEL) | (3<<UCSZ0);                // Asyncronous mode
+    #elif defined(__AVR_ATtiny4313__) 
+    UCSRC = (3<<UCSZ0);
+    #endif
 
     USART_RxTail = 0;
     USART_RxHead = 0;
@@ -80,7 +84,11 @@ uint8_t USART_Rx(void){
     return USART_RxBuf[tmptail]; 
 }
 
+#ifdef __AVR_ATmega8__
 ISR(USART_RXC_vect){
+#elif defined(__AVR_ATtiny4313__)
+ISR(USART_RX_vect){
+#endif
     uint8_t tmphead;
     uint8_t data = UDR;
     tmphead = ( USART_RxHead + 1 ) & USART_RX_MASK;
@@ -91,7 +99,11 @@ ISR(USART_RXC_vect){
         USART_RxCallback(data);
 }
 
+#ifdef __AVR_ATmega8__
 ISR(USART_TXC_vect){
+#elif defined(__AVR_ATtiny4313__)
+ISR(USART_TX_vect){
+#endif
     uint8_t tmptail;
     if ( USART_TxHead != USART_TxTail ){
         tmptail = ( USART_TxTail + 1 ) & USART_TX_MASK;

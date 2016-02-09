@@ -25,4 +25,6 @@ void SM_SetNextWithDelay (uint8_t next, uint32_t delay);
 
 uint64_t getClock (void);
 
+uint8_t SM_ComputeTimerStart(int64_t fcpu);
+
 #endif

@@ -6,7 +6,7 @@
 
 volatile static uint8_t state_last = 0;
 volatile static uint8_t state_current = 0;
-volatile static uint8_t state_next = 0;
+volatile static uint8_t state_next = 1;
 volatile static uint32_t state_wait = 0; 
 
 volatile static uint64_t clock_counter = 0;
@@ -68,4 +68,10 @@ uint64_t getClock (void){
 	return clock_counter;
 }
 
-
+uint8_t SM_ComputeTimerStart(int64_t fcpu){
+    // Attention, if using internal RC, expected values may vary
+    int64_t v = 255-(fcpu >> 6) / 1000;
+    if(v>255) v = 255;
+    else if(v < 0) v = 0;
+    return v;
+}

@@ -2,7 +2,7 @@
 MCU_GCC     = atmega8
 MCU_AVRDUDE = m8
 OUT_DIR     = out
-OBJECTS     = main.o usart_serial.o cli_parser.o i2c_master.o adc.o pwm_osc1.o state_machine.o music.o
+OBJECTS     = hello_world.o usart_serial.o cli_parser.o i2c_master.o adc.o pwm_osc1.o state_machine.o music.o
 
 CC          = avr-gcc
 OBJCOPY     = avr-objcopy
